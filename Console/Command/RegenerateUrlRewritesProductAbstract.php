@@ -78,6 +78,9 @@ abstract class RegenerateUrlRewritesProductAbstract extends RegenerateUrlRewrite
                     ->setStoreId($storeId);
 
             if (!$this->_commandOptions['noRegenUrlKey']) {
+                if ($this->_commandOptions['forceRegenUrlKey']) {
+                    $product->setData('url_key', null);
+                }
                 $generatedKey = $this->_productUrlPathGenerator->getUrlKey($product);
 
                 $product->setData('url_key', $generatedKey);

@@ -113,7 +113,13 @@ class RegenerateUrlRewrites extends RegenerateUrlRewritesCategoryAbstract
                     null,
                     InputOption::VALUE_NONE,
                     'Prevent url_key regeneration'
-                ),       
+                ),
+                new InputOption(
+                    self::INPUT_KEY_FORCE_REGEN_URL_KEY,
+                    null,
+                    InputOption::VALUE_NONE,
+                    'Force url_key regeneration with magento logic'
+                ),
             ]);
     }
 
@@ -222,6 +228,11 @@ class RegenerateUrlRewrites extends RegenerateUrlRewritesCategoryAbstract
 
         if (isset($options[self::INPUT_KEY_NO_REGEN_URL_KEY]) && $options[self::INPUT_KEY_NO_REGEN_URL_KEY] === true) {
             $this->_commandOptions['noRegenUrlKey'] = true;
+        }
+
+        if (isset($options[self::INPUT_KEY_FORCE_REGEN_URL_KEY]) && $options[self::INPUT_KEY_FORCE_REGEN_URL_KEY] === true) {
+            $this->_commandOptions['forceRegenUrlKey'] = true;
+            $this->_commandOptions['noRegenUrlKey'] = false;
         }
 
         if (isset($options[self::INPUT_KEY_NO_REINDEX]) && $options[self::INPUT_KEY_NO_REINDEX] === true) {
